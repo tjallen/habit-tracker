@@ -1,18 +1,35 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      tasks: [
+        'foo',
+        'bar'
+      ],
+    }
+  }
+  onChange() {
+    console.log('onChange');
+  }
+  onSubmit(e) {
+    e.preventDefault();
+    console.log('onSubmit');
+  }
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        {
+          this.state.tasks.length > 0
+          ? <pre>{JSON.stringify(this.state.tasks)}</pre>
+          : <p>no tasks</p>
+        }
+        <form onSubmit={this.onSubmit}>
+          <input type="text" placeholder="add a habit or task to track" onChange={this.onChange} />
+          <input type="submit" />
+        </form>
       </div>
     );
   }
