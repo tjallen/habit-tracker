@@ -6,17 +6,27 @@ class App extends Component {
     super();
     this.state = {
       tasks: [
-        'foo',
-        'bar'
+        {name: 'foo'},
+        {name: 'bar'},
       ],
     }
+    this.onSubmit = this.onSubmit.bind(this);
   }
-  onChange() {
-    console.log('onChange');
+  componentDidMount() {
+    this.addTaskInput.focus();
+  }
+  onChange(e) {
+    console.log('onChange', e.target.value);
   }
   onSubmit(e) {
     e.preventDefault();
-    console.log('onSubmit');
+    const task = this.addTaskInput.value;
+    console.log('onSubmit', task);
+    if (task) {
+      this.setState({
+        tasks: [ ...this.state.tasks, { name: task }]
+      }, this.addTaskInput.value = '');
+    }
   }
   render() {
     return (
@@ -27,7 +37,7 @@ class App extends Component {
           : <p>no tasks</p>
         }
         <form onSubmit={this.onSubmit}>
-          <input type="text" placeholder="add a habit or task to track" onChange={this.onChange} />
+          <input type="text" placeholder="add a habit or task to track" onChange={this.onChange} ref={(input) => { this.addTaskInput = input; }} />
           <input type="submit" />
         </form>
       </div>
