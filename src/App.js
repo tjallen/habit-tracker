@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
+import { v4 } from 'uuid';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       tasks: [
-        {name: 'foo'},
-        {name: 'bar'},
+        {name: 'foo', id: v4() },
+        {name: 'bar', id: v4() },
       ],
     }
     this.onSubmit = this.onSubmit.bind(this);
@@ -24,7 +25,10 @@ class App extends Component {
     console.log('onSubmit', task);
     if (task) {
       this.setState({
-        tasks: [ ...this.state.tasks, { name: task }]
+        tasks: [ ...this.state.tasks, {
+          name: task,
+          id: v4(),
+        }],
       }, this.addTaskInput.value = '');
     }
   }
@@ -33,7 +37,7 @@ class App extends Component {
       <div className="App">
         {
           this.state.tasks.length > 0
-          ? <pre>{JSON.stringify(this.state.tasks)}</pre>
+          ? <pre>{JSON.stringify(this.state.tasks, null, 2)}</pre>
           : <p>no tasks</p>
         }
         <form onSubmit={this.onSubmit}>
