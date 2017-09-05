@@ -1,43 +1,34 @@
 import React, { Component } from 'react';
 import './App.css';
-import { v4 } from 'uuid';
+// import { v4 } from 'uuid';
+import taskStore from './stores/taskStore';
 
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      tasks: [
-        {name: 'foo', id: v4() },
-        {name: 'bar', id: v4() },
-      ],
-    }
     this.onSubmit = this.onSubmit.bind(this);
   }
   componentDidMount() {
     this.addTaskInput.focus();
   }
-  onChange(e) {
-    console.log('onChange', e.target.value);
-  }
+  // onChange(e) {
+  //   console.log('onChange', e.target.value);
+  // }
   onSubmit(e) {
     e.preventDefault();
     const task = this.addTaskInput.value;
-    console.log('onSubmit', task);
     if (task) {
-      this.setState({
-        tasks: [ ...this.state.tasks, {
-          name: task,
-          id: v4(),
-        }],
-      }, this.addTaskInput.value = '');
+      taskStore.addTask(task);
+      this.forceUpdate();
     }
+    this.addTaskInput.value = '';
   }
   render() {
     return (
       <div className="App">
         {
-          this.state.tasks.length > 0
-          ? <pre>{JSON.stringify(this.state.tasks, null, 2)}</pre>
+          taskStore.getAll().length > 0
+          ? <pre>{JSON.stringify(taskStore.getAll(), null, 2)}</pre>
           : <p>no tasks</p>
         }
         <form onSubmit={this.onSubmit}>
