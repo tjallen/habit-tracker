@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { observer } from 'mobx-react';
-import taskStore from './stores/taskStore';
+import taskStore from '../stores/taskStore';
 
 @observer
 class App extends Component {
