@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-// import { v4 } from 'uuid';
+import { observer } from 'mobx-react';
 import taskStore from './stores/taskStore';
 
+@observer
 class App extends Component {
   constructor() {
     super();
@@ -11,15 +12,12 @@ class App extends Component {
   componentDidMount() {
     this.addTaskInput.focus();
   }
-  // onChange(e) {
-  //   console.log('onChange', e.target.value);
-  // }
   onSubmit(e) {
     e.preventDefault();
     const task = this.addTaskInput.value;
     if (task) {
       taskStore.addTask(task);
-      this.forceUpdate();
+      // this.forceUpdate();
     }
     this.addTaskInput.value = '';
   }

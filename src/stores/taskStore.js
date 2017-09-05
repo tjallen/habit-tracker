@@ -1,4 +1,5 @@
 import { v4 } from 'uuid';
+import { observable } from 'mobx';
 
 const placeholders = [
   {name: 'foo!', id: v4() },
@@ -6,6 +7,7 @@ const placeholders = [
 ];
 
 class TaskStore {
+  @observable tasks = [];
   constructor() {
     this.tasks = placeholders || [];
   }
