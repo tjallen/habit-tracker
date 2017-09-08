@@ -24,7 +24,7 @@ const loadTasks = () => {
 }
 
 // const foo = autorun(() => {
-//   console.log('yo')
+//  saveTasks() 
 // })
 
 class TaskStore {
@@ -38,8 +38,9 @@ class TaskStore {
       console.log('no task name provided');
       return
     }
-    this.tasks.set(name, {
+    this.tasks.set(v4(), {
       id: v4(),
+      name,
       data: new observable.map(),
     });
     // saveTasks(this.tasks);
@@ -53,6 +54,12 @@ class TaskStore {
       return;
     }
 //     saveTasks(this.tasks);
+  }
+  @action deleteTask() {
+    // TODO
+  }
+  @action renameTask() {
+    // TODO
   }
   getAll() {
     // console.log(toJS(this.tasks.entries()))

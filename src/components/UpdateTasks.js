@@ -43,10 +43,10 @@ export default class UpdateTasks extends Component {
           {Array.from(tasks.map((task, index) => {
             const key = task[0];
             const value = task[1];
-            const { data, id } = value;
+            const { data, id, name } = value;
             return (
               <div key={id}>
-                <label>{key}</label>
+                <label>{name}</label>
                 <input
                   type={inputType}
                   value={
