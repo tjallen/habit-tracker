@@ -40,21 +40,27 @@ export default class UpdateTasks extends Component {
     return (
       <div>updatetasks for {today}
         <form onSubmit={this.handleUpdateFormSubmit} >
-          {Array.from(tasks.map((task, index) =>
-            <div key={task[1].id}>
-              <label>{task[0]}</label>
-              <input
-                type={inputType}
-                value={
-                  task[1].data && task[1].data.hasOwnProperty(today) 
-                  ? task[1].data[today]
-                  : 0
-                }
-                onChange={(e) => this.handleUpdateInputChange(
-                  e, task[0] 
-                )}
-              />
-            </div>
+          {Array.from(tasks.map((task, index) => {
+            const key = task[0];
+            const value = task[1];
+            const { data, id } = value;
+            return (
+              <div key={id}>
+                <label>{key}</label>
+                <input
+                  type={inputType}
+                  value={
+                    data && data.hasOwnProperty(today) 
+                    ? data[today]
+                    : 0
+                  }
+                  onChange={(e) => this.handleUpdateInputChange(
+                    e, key 
+                  )}
+                />
+              </div>
+              )
+            }
           ))}
           <input type="submit" />
         </form>
