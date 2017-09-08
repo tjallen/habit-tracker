@@ -1,5 +1,6 @@
+/*eslint-disable no-unused-vars*/
 import { v4 } from 'uuid';
-import { observable } from 'mobx';
+import { observable, extendObservable, action, autorun, isObservable, toJS } from 'mobx';
 
 const saveTasks = (tasks) => {
   try {
@@ -22,18 +23,40 @@ const loadTasks = () => {
   }
 }
 
+// const foo = autorun(() => {
+//   console.log('yo')
+// })
+
 class TaskStore {
-  @observable tasks = loadTasks() || [];
-  addTask(name) {
+  // @observable tasks = loadTasks() || [];
+  @observable tasks = new observable.map();
+  @action addTask(name) {
+    // console.log(this.albums, isObservable(this.albums))
+    // this.albums.set('height',6)
+    // console.log(this.albums.get('height'));
     if (!name) {
       console.log('no task name provided');
+      return
+    }
+    this.tasks.set(name, {
+      id: v4(),
+      data: new observable.map(),
+    });
+    // saveTasks(this.tasks);
+  }
+  @action updateTask(name, id, date, value) {
+    if (this.tasks.has(name)) {
+      const task = this.tasks.get(name);
+      console.log(task, 'found');
+    //  this.tasks.delete(name); 
+    task.data.set('11-01-1900', 99);
       return;
     }
-    this.tasks.push({ name, id: v4() });
-    saveTasks(this.tasks);
+//     saveTasks(this.tasks);
   }
   getAll() {
-    return this.tasks;
+    // console.log(toJS(this.tasks.entries()))
+    return this.tasks.entries();
   }
 }
 
