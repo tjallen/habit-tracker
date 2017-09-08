@@ -6,18 +6,24 @@ import { observer } from 'mobx-react';
 export default class UpdateTasks extends Component {
   constructor(props) {
     super(props);
-    this.handleUpdateInputChange = this.handleUpdateInputChange.bind(this);
+    this.handleDayCountInputChange = this.handleDayCountInputChange.bind(this);
   }
-  handleUpdateInputChange(e, id) {
+  handleDayCountInputChange(e, id) {
     const date = moment().format('YYYY-MM-DD');
     const value = e.target.value;
     const { taskStore } = this.props;
     taskStore.setDayTaskCount(id, date, value);
   }
-  handleUpdateFormSubmit(e) {
-    e.preventDefault();
-    console.log('form submitted - not currently used');
+  handleNameInputChange(e, id) {
+    console.log(e, id, 'rename');
   }
+  handleRemoveClick(e, id) {
+    console.log('remove', id);
+  }
+  // handleUpdateFormSubmit(e) {
+  //   e.preventDefault();
+  //   console.log('form submitted - not currently used');
+  // }
   render() {
     const { taskStore } = this.props;
     const tasks = taskStore.getAll();
@@ -25,31 +31,32 @@ export default class UpdateTasks extends Component {
     const today = moment().format('YYYY-MM-DD');
     const inputType = 'number'; // TODO make customiseable
     return (
-      <div>updatetasks for {today}
+      <div><hr />updatetasks for {today}
         <form onSubmit={this.handleUpdateFormSubmit} >
           {Array.from(tasks.map((task, index) => {
             const key = task[0];
             const value = task[1];
             const { data, id, name } = value;
+            const count = data && data.hasOwnProperty(today) ? data[today] : undefined;
             return (
               <div key={id}>
-                <label>{name}</label>
+                <label><b>{name}</b></label>
+                <br />
+                <input type="text" value={name} onChange={(e) => this.handleNameInputChange(e, key)}/>
                 <input
                   type={inputType}
-                  value={
-                    data && data.hasOwnProperty(today) 
-                    ? data[today]
-                    : 0
-                  }
-                  onChange={(e) => this.handleUpdateInputChange(
+                  value={count}
+                  onChange={(e) => this.handleDayCountInputChange(
                     e, key 
                   )}
                 />
+                <a onClick={this.handleRemoveClick}>x</a>
+                <hr />
               </div>
               )
             }
           ))}
-          <input type="submit" />
+          {/* <input type="submit" /> */}
         </form>
       </div>
     )

@@ -1,6 +1,6 @@
 /*eslint-disable no-unused-vars*/
 import { v4 } from 'uuid';
-import { observable, extendObservable, action, autorun, isObservable, toJS } from 'mobx';
+import { observable, extendObservable, action, autorun, reaction, isObservable, toJS } from 'mobx';
 
 const saveTasks = (tasks) => {
   try {
@@ -24,8 +24,7 @@ const loadTasks = () => {
 }
 
 class TaskStore {
-  // @observable tasks = loadTasks() || [];
-  @observable tasks = new observable.map();
+  @observable tasks = loadTasks() !== undefined ? new observable.map(loadTasks()) : new observable.map();
   @action addTask(name) {
     if (!name) {
       console.log('no task name provided');
@@ -36,7 +35,7 @@ class TaskStore {
       name,
       data: new observable.map(),
     });
-    // saveTasks(this.tasks);
+    saveTasks(this.tasks);
   }
   @action setDayTaskCount(id, date, value) {
     if (this.tasks.has(id)) {
