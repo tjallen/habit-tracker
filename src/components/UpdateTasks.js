@@ -7,29 +7,16 @@ export default class UpdateTasks extends Component {
   constructor(props) {
     super(props);
     this.handleUpdateInputChange = this.handleUpdateInputChange.bind(this);
-    // this.state = {
-    //   tasks: props.taskStore.getAll()
-    // };
   }
   handleUpdateInputChange(e, id) {
-    console.log('============');
-    console.log(e.target.value);
-    console.log(id);
-    // const newTaskBatch = this.state.tasks;
-    // const itemToChange = newTaskBatch.findIndex(item => item.id === id);
-    // console.log(newTaskBatch[itemToChange]);
-    // newTaskBatch[itemToChange].value = e.target.value;
     const date = moment().format('YYYY-MM-DD');
     const value = e.target.value;
     const { taskStore } = this.props;
-    taskStore.updateTask(id, date, value);
-    // this.setState({
-    //   tasks: newTaskBatch,
-    // });
+    taskStore.setDayTaskCount(id, date, value);
   }
   handleUpdateFormSubmit(e) {
     e.preventDefault();
-    console.log('!');
+    console.log('form submitted - not currently used');
   }
   render() {
     const { taskStore } = this.props;

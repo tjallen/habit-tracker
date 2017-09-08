@@ -38,12 +38,10 @@ class TaskStore {
     });
     // saveTasks(this.tasks);
   }
-  @action updateTask(name, id, date, value) {
-    if (this.tasks.has(name)) {
-      const task = this.tasks.get(name);
-      console.log(task, 'found');
-      task.data.set('11-01-1900', 99);
-      return;
+  @action setDayTaskCount(id, date, value) {
+    if (this.tasks.has(id)) {
+      const task = this.tasks.get(id);
+      task.data.set(date, value);
     }
     // saveTasks(this.tasks);
   }
