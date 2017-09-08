@@ -23,17 +23,10 @@ const loadTasks = () => {
   }
 }
 
-// const foo = autorun(() => {
-//  saveTasks() 
-// })
-
 class TaskStore {
   // @observable tasks = loadTasks() || [];
   @observable tasks = new observable.map();
   @action addTask(name) {
-    // console.log(this.albums, isObservable(this.albums))
-    // this.albums.set('height',6)
-    // console.log(this.albums.get('height'));
     if (!name) {
       console.log('no task name provided');
       return
@@ -49,11 +42,10 @@ class TaskStore {
     if (this.tasks.has(name)) {
       const task = this.tasks.get(name);
       console.log(task, 'found');
-    //  this.tasks.delete(name); 
-    task.data.set('11-01-1900', 99);
+      task.data.set('11-01-1900', 99);
       return;
     }
-//     saveTasks(this.tasks);
+    // saveTasks(this.tasks);
   }
   @action deleteTask() {
     // TODO
