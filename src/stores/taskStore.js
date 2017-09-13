@@ -1,6 +1,5 @@
 /*eslint-disable no-unused-vars*/
 import { v4 } from 'uuid';
-import { observable, extendObservable, action, autorun, reaction, isObservable, toJS } from 'mobx';
 
 const saveTasks = (tasks) => {
   try {
@@ -24,35 +23,40 @@ const loadTasks = () => {
 }
 
 class TaskStore {
-  @observable tasks = loadTasks() !== undefined ? new observable.map(loadTasks()) : new observable.map();
-  @action addTask(name) {
+  tasks = loadTasks() || [];
+  addTask(name) {
     if (!name) {
       console.log('no task name provided');
       return
     }
-    this.tasks.set(v4(), {
+    this.tasks.push({
       id: v4(),
       name,
-      data: new observable.map(),
     });
     saveTasks(this.tasks);
   }
-  @action setDayTaskCount(id, date, value) {
-    if (this.tasks.has(id)) {
-      const task = this.tasks.get(id);
-      task.data.set(date, value);
+  setDayTaskCount(id, date, value) {
+    const task = this.tasks.find(task => task.id === id);
+    if (task) {
+      if (!task.hasOwnProperty('data')) {
+        task.data = {};
+        console.log('init task data');
+      }
+      task.data[date] = value;
+      console.log('set task data value', task.data, task.data[date], value);
+    } else {
+      console.log('unknown task id');
     }
-    // saveTasks(this.tasks);
+    saveTasks(this.tasks);
   }
-  @action deleteTask() {
+  deleteTask() {
     // TODO
   }
-  @action renameTask() {
+  renameTask() {
     // TODO
   }
   getAll() {
-    // console.log(toJS(this.tasks.entries()))
-    return this.tasks.entries();
+    return this.tasks;
   }
 }
 

@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { toJS } from 'mobx';
-import { observer } from 'mobx-react';
 import AddTaskForm from './AddTaskForm';
 import QuickDebugInfo from './QuickDebugInfo';
 import UpdateTasks from './UpdateTasks';
 import moment from 'moment';
 
-@observer
 export default class App extends Component {
   componentWillMount() {
     this.updateCurrentDate();
@@ -20,7 +17,7 @@ export default class App extends Component {
   render() {
     const { taskStore } = this.props;
     const { date } = this.state;
-    console.log(toJS(taskStore.getAll()));
+    console.log(taskStore.getAll());
     return (
       <div style={{textAlign: 'center'}}>
         <QuickDebugInfo date={date} taskStore={taskStore} />

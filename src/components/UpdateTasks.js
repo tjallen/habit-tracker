@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { observer } from 'mobx-react';
 
-@observer
 export default class UpdateTasks extends Component {
   constructor(props) {
     super(props);
@@ -30,24 +28,24 @@ export default class UpdateTasks extends Component {
     // const { tasks } = this.state;
     const today = moment().format('YYYY-MM-DD');
     const inputType = 'number'; // TODO make customiseable
+    const pres = taskStore.getAll().length;
+    console.log('=>', pres, 'tasks present');
     return (
       <div><hr />updatetasks for {today}
-        <form onSubmit={this.handleUpdateFormSubmit} >
-          {Array.from(tasks.map((task, index) => {
-            const key = task[0];
-            const value = task[1];
-            const { data, id, name } = value;
-            const count = data && data.hasOwnProperty(today) ? data[today] : undefined;
+        <form onSubmit={this.handleUpdateFormSubmit}>
+          {tasks.map((task, index) => {
+            const { id, name } = task;
+            const count = task.hasOwnProperty('data') ? task.data[today] : undefined;
             return (
               <div key={id}>
                 <label><b>{name}</b></label>
                 <br />
-                <input type="text" value={name} onChange={(e) => this.handleNameInputChange(e, key)}/>
+                <input type="text" value={name} onChange={(e) => this.handleNameInputChange(e, id)}/>
                 <input
                   type={inputType}
                   value={count}
                   onChange={(e) => this.handleDayCountInputChange(
-                    e, key 
+                    e, id 
                   )}
                 />
                 <a onClick={this.handleRemoveClick}>x</a>
@@ -55,7 +53,7 @@ export default class UpdateTasks extends Component {
               </div>
               )
             }
-          ))}
+          )}
           {/* <input type="submit" /> */}
         </form>
       </div>

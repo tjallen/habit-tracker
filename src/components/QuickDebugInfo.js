@@ -1,7 +1,6 @@
 import React from 'react';
-import { observer } from 'mobx-react';
 
-const QuickDebugInfo = observer(({ taskStore }) => {
+const QuickDebugInfo = ({ taskStore }) => {
   return (
     <div>
       {
@@ -11,6 +10,5 @@ const QuickDebugInfo = observer(({ taskStore }) => {
       }
     </div>
   )
-
-});
+};
 export default QuickDebugInfo;
