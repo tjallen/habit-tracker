@@ -1,11 +1,11 @@
 import React from 'react';
 
-const QuickDebugInfo = ({ taskStore }) => {
+const QuickDebugInfo = ({ tasks }) => {
   return (
     <div>
       {
-        taskStore.getAll() !== undefined
-        ? <pre>{JSON.stringify(taskStore.getAll(), null, 2)}</pre>
+        tasks !== undefined
+        ? <pre>{JSON.stringify(tasks, null, 2)}</pre>
         : <p>no tasks</p>
       }
     </div>

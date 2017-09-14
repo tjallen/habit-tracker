@@ -10,7 +10,7 @@ export default class UpdateTasks extends Component {
     const date = moment().format('YYYY-MM-DD');
     const value = e.target.value;
     const { taskStore } = this.props;
-    taskStore.setDayTaskCount(id, date, value);
+    // taskStore.setDayTaskCount(id, date, value);
   }
   handleNameInputChange(e, id) {
     console.log(e, id, 'rename');
@@ -18,22 +18,17 @@ export default class UpdateTasks extends Component {
   handleRemoveClick(e, id) {
     console.log('remove', id);
   }
-  // handleUpdateFormSubmit(e) {
-  //   e.preventDefault();
-  //   console.log('form submitted - not currently used');
-  // }
   render() {
-    const { taskStore } = this.props;
-    const tasks = taskStore.getAll();
-    // const { tasks } = this.state;
+    const { tasks } = this.props;
+    // const tasks = taskStore.getAll();
     const today = moment().format('YYYY-MM-DD');
     const inputType = 'number'; // TODO make customiseable
-    const pres = taskStore.getAll().length;
-    console.log('=>', pres, 'tasks present');
+    // const pres = taskStore.getAll().length;
+    // console.log('=>', pres, 'tasks present');
     return (
       <div><hr />updatetasks for {today}
         <form onSubmit={this.handleUpdateFormSubmit}>
-          {tasks.map((task, index) => {
+          {/* {tasks.map((task, index) => {
             const { id, name } = task;
             const count = task.hasOwnProperty('data') ? task.data[today] : undefined;
             return (
@@ -53,7 +48,7 @@ export default class UpdateTasks extends Component {
               </div>
               )
             }
-          )}
+          )} */}
           {/* <input type="submit" /> */}
         </form>
       </div>

@@ -2,10 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
-import taskStore from './stores/taskStore';
+import { Provider } from 'react-redux';
+import configureStore from './configureStore';
+
+const store = configureStore();
 
 ReactDOM.render(
-  <App taskStore={taskStore} />,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 );
 
