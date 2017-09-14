@@ -3,8 +3,16 @@ import AddTaskForm from './AddTaskForm';
 import QuickDebugInfo from './QuickDebugInfo';
 import UpdateTasks from './UpdateTasks';
 import moment from 'moment';
+import taskStore from '../stores/taskStore';
 
 export default class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      tasks: taskStore.getAll(),
+      date: moment().format('YYYY-MM-DD'),
+    }
+  }
   componentWillMount() {
     this.updateCurrentDate();
   }
