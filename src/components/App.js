@@ -13,15 +13,6 @@ export default class App extends Component {
       date: moment().format('YYYY-MM-DD'),
     }
   }
-  componentWillMount() {
-    this.updateCurrentDate();
-  }
-  updateCurrentDate() {
-    const date = moment().format('YYYY-MM-DD');
-    this.setState({
-      date
-    });
-  }
   render() {
     const { taskStore } = this.props;
     const { date } = this.state;
