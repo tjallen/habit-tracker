@@ -14,12 +14,13 @@ function tasksReducer(state = [], action) {
         if (task.id !== action.id) {
           return task;
         }
-        return Object.assign(task, {
+        return {
+          ...task,
           data: {
             ...task.data,
             [action.date]: action.count,
           }
-        });
+        }
       });
     }
     default:
