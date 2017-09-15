@@ -8,6 +8,7 @@ import App from './../components/App';
 
 const mapStateToProps = state => ({
   tasks: state.tasks,
+  date: state.date,
 });
 
 const AppContainer = connect(

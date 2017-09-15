@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import moment from 'moment';
 
 export default class UpdateTasks extends Component {
   constructor(props) {
@@ -8,24 +7,22 @@ export default class UpdateTasks extends Component {
     this.handleRemoveClick = this.handleRemoveClick.bind(this);
   }
   handleCountChange(e, id) {
-    const date = moment().format('YYYY-MM-DD');
+    const { onCountChange, date } = this.props;
     const count = e.target.value;
-    const { onCountChange } = this.props;
     onCountChange(id, date, count);
   }
   handleRemoveClick(id) {
     this.props.onRemoveClick(id);
   }
   render() {
-    const { tasks } = this.props;
-    const today = moment().format('YYYY-MM-DD');
+    const { tasks, date } = this.props;
     const inputType = 'number'; // TODO make customiseable
     return (
-      <div><hr />updatetasks for {today}
+      <div><hr />updatetasks for {date}
         <form onSubmit={this.handleUpdateFormSubmit}>
           {tasks.map((task, index) => {
             const { id, name } = task;
-            const count = task.hasOwnProperty('data') ? task.data[today] : undefined;
+            const count = task.hasOwnProperty('data') ? task.data[date] : undefined;
             return (
               <div key={id}>
                 <label><b>name</b></label>&nbsp;
