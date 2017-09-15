@@ -8,9 +8,9 @@ export default class UpdateTasks extends Component {
   }
   handleDayCountInputChange(e, id) {
     const date = moment().format('YYYY-MM-DD');
-    const value = e.target.value;
+    const count = e.target.value;
     const { onTaskCountUpdate } = this.props;
-    onTaskCountUpdate(id, date, value);
+    onTaskCountUpdate(id, date, count);
   }
   handleNameInputChange(e, id) {
     console.log(e, id, 'rename');

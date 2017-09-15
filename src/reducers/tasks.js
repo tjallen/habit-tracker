@@ -17,7 +17,7 @@ function tasksReducer(state = [], action) {
         return Object.assign(task, {
           data: {
             ...task.data,
-            [action.date]: action.value
+            [action.date]: action.count,
           }
         });
       });

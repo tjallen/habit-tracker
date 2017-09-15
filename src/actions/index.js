@@ -5,6 +5,6 @@ export const addTask = (name) => ({
   type: ADD_TASK, name, id: v4(), data: {},
 });
 
-export const updateTaskCount = (id, date, value) => ({
-  type: UPDATE_TASK_COUNT, id, date, value,
+export const updateTaskCount = (id, date, count) => ({
+  type: UPDATE_TASK_COUNT, id, date, count,
 });
