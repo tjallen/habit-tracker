@@ -6,22 +6,16 @@ import moment from 'moment';
 // import taskStore from '../stores/taskStore';
 
 export default class App extends Component {
-  // constructor() {
-  //   super();
-  //   // this.state = {
-  //   //   tasks: taskStore.getAll(),
-  //   //   date: moment().format('YYYY-MM-DD'),
-  //   // }
-  // }
   render() {
+    const props = this.props;
     // const { taskStore } = this.props;
     // const { date } = this.state;
     // console.log(taskStore.getAll());
     return (
       <div style={{textAlign: 'center'}}>
-        <QuickDebugInfo />
-        <AddTaskForm />
-        <UpdateTasks />
+        <QuickDebugInfo {...props} />
+        <AddTaskForm {...props} />
+        <UpdateTasks {...props} />
       </div>
     );
   }

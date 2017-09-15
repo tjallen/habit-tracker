@@ -13,11 +13,11 @@ class AddTaskForm extends Component {
     taskStore.addTask(this.addTaskInput.value);
   }
   onSubmit(e) {
-    const { taskStore } = this.props;
+    const { onAddTaskSubmit } = this.props;
     e.preventDefault();
     const task = this.addTaskInput.value;
     if (task) {
-      taskStore.addTask(task);
+      onAddTaskSubmit(task);
     }
     this.addTaskInput.value = '';
   }

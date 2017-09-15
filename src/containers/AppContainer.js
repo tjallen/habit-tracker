@@ -6,7 +6,7 @@ const mapStateToProps = state => ({
   tasks: state.tasks,
 });
 
-const AppContainer = connect (
+const AppContainer = connect(
   mapStateToProps,
   {
     onAddTaskSubmit: addTask,
