@@ -5,7 +5,7 @@ function tasksReducer(state = [], action) {
     case ADD_TASK: {
       return state.concat({
         id: action.id,
-        text: action.text,
+        name: action.name,
         data: action.data,
       });
     }
