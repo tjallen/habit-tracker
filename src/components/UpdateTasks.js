@@ -9,8 +9,8 @@ export default class UpdateTasks extends Component {
   handleDayCountInputChange(e, id) {
     const date = moment().format('YYYY-MM-DD');
     const value = e.target.value;
-    const { taskStore } = this.props;
-    // taskStore.setDayTaskCount(id, date, value);
+    const { onTaskCountUpdate } = this.props;
+    onTaskCountUpdate(id, date, value);
   }
   handleNameInputChange(e, id) {
     console.log(e, id, 'rename');
@@ -28,7 +28,7 @@ export default class UpdateTasks extends Component {
     return (
       <div><hr />updatetasks for {today}
         <form onSubmit={this.handleUpdateFormSubmit}>
-          {/* {tasks.map((task, index) => {
+          {tasks.map((task, index) => {
             const { id, name } = task;
             const count = task.hasOwnProperty('data') ? task.data[today] : undefined;
             return (
@@ -48,7 +48,7 @@ export default class UpdateTasks extends Component {
               </div>
               )
             }
-          )} */}
+          )}
           {/* <input type="submit" /> */}
         </form>
       </div>
