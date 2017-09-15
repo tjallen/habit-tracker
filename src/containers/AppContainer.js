@@ -1,5 +1,9 @@
 import { connect } from 'react-redux';
-import { addTask, updateTaskCount } from './../actions';
+import {
+  addTask,
+  updateTaskCount,
+  removeTask,
+} from './../actions';
 import App from './../components/App';
 
 const mapStateToProps = state => ({
@@ -10,7 +14,8 @@ const AppContainer = connect(
   mapStateToProps,
   {
     onAddTaskSubmit: addTask,
-    onTaskCountUpdate: updateTaskCount,
+    onCountChange: updateTaskCount,
+    onRemoveClick: removeTask,
   }
 )(App);
 export default AppContainer;

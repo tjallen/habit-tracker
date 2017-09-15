@@ -4,27 +4,22 @@ import moment from 'moment';
 export default class UpdateTasks extends Component {
   constructor(props) {
     super(props);
-    this.handleDayCountInputChange = this.handleDayCountInputChange.bind(this);
+    this.handleCountChange = this.handleCountChange.bind(this);
+    this.handleRemoveClick = this.handleRemoveClick.bind(this);
   }
-  handleDayCountInputChange(e, id) {
+  handleCountChange(e, id) {
     const date = moment().format('YYYY-MM-DD');
     const count = e.target.value;
-    const { onTaskCountUpdate } = this.props;
-    onTaskCountUpdate(id, date, count);
+    const { onCountChange } = this.props;
+    onCountChange(id, date, count);
   }
-  handleNameInputChange(e, id) {
-    console.log(e, id, 'rename');
-  }
-  handleRemoveClick(e, id) {
-    console.log('remove', id);
+  handleRemoveClick(id) {
+    this.props.onRemoveClick(id);
   }
   render() {
     const { tasks } = this.props;
-    // const tasks = taskStore.getAll();
     const today = moment().format('YYYY-MM-DD');
     const inputType = 'number'; // TODO make customiseable
-    // const pres = taskStore.getAll().length;
-    // console.log('=>', pres, 'tasks present');
     return (
       <div><hr />updatetasks for {today}
         <form onSubmit={this.handleUpdateFormSubmit}>
@@ -39,11 +34,11 @@ export default class UpdateTasks extends Component {
                 <input
                   type={inputType}
                   value={count}
-                  onChange={(e) => this.handleDayCountInputChange(
+                  onChange={(e) => this.handleCountChange(
                     e, id 
                   )}
                 />
-                <a onClick={this.handleRemoveClick}>x</a>
+                <a onClick={() => this.handleRemoveClick(id)}>x</a>
                 <hr />
               </div>
               )
