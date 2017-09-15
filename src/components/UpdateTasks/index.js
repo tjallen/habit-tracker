@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import UpdateTask from './UpdateTask';
 
 export default class UpdateTasks extends Component {
   constructor(props) {
@@ -16,29 +17,22 @@ export default class UpdateTasks extends Component {
   }
   render() {
     const { tasks, date } = this.props;
-    const inputType = 'number'; // TODO make customiseable
     return (
       <div><hr />updatetasks for {date}
         <form onSubmit={this.handleUpdateFormSubmit}>
           {tasks.map((task, index) => {
             const { id, name } = task;
-            const count = task.hasOwnProperty('data') ? task.data[date] : undefined;
+            const count = task.data[date];
             return (
               <div key={id}>
-                <label><b>name</b></label>&nbsp;
-                <input type="text" defaultValue={name} onChange={(e) => this.handleNameInputChange(e, id)}/>
-                <br />
-                <label><b>count</b></label>&nbsp;
-                <input
-                  type={inputType}
-                  defaultValue={count}
-                  onChange={(e) => this.handleCountChange(
-                    e, id 
-                  )}
+                <UpdateTask
+                  handleCountChange={this.handleCountChange}
+                  handleRemoveClick={this.handleRemoveClick}
+                  id={id}
+                  key={id}
+                  name={name}
+                  count={count}
                 />
-                <br />
-                <a onClick={() => this.handleRemoveClick(id)}><button>Remove</button></a>
-                <hr />
               </div>
               )
             }
