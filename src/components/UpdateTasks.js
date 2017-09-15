@@ -28,23 +28,24 @@ export default class UpdateTasks extends Component {
             const count = task.hasOwnProperty('data') ? task.data[today] : undefined;
             return (
               <div key={id}>
-                <label><b>{name}</b></label>
+                <label><b>name</b></label>&nbsp;
+                <input type="text" defaultValue={name} onChange={(e) => this.handleNameInputChange(e, id)}/>
                 <br />
-                <input type="text" value={name} onChange={(e) => this.handleNameInputChange(e, id)}/>
+                <label><b>count</b></label>&nbsp;
                 <input
                   type={inputType}
-                  value={count}
+                  defaultValue={count}
                   onChange={(e) => this.handleCountChange(
                     e, id 
                   )}
                 />
-                <a onClick={() => this.handleRemoveClick(id)}>x</a>
+                <br />
+                <a onClick={() => this.handleRemoveClick(id)}><button>Remove</button></a>
                 <hr />
               </div>
               )
             }
           )}
-          {/* <input type="submit" /> */}
         </form>
       </div>
     )
