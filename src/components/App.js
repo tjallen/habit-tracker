@@ -12,7 +12,7 @@ export default class App extends Component {
     // const { date } = this.state;
     // console.log(taskStore.getAll());
     return (
-      <div style={{textAlign: 'center'}}>
+      <div style={{textAlign: 'left'}}>
         <QuickDebugInfo {...props} />
         <AddTaskForm {...props} />
         <UpdateTasks {...props} />
