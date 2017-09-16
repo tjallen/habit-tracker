@@ -9,20 +9,23 @@ const UpdateTask = (props) => {
     count,
     handleCountChange,
     handleRemoveClick,
+    handleNameChange,
   } = props;
   return (
     <div>
       <UpdateTaskLabel text='name' />
       <UpdateTaskInput
         type="text"
+        id={id}
         value={name}
+        onValueChange={handleNameChange}
       />
       <UpdateTaskLabel text='count' />
       <UpdateTaskInput
         type='number'
         id={id}
         value={count}
-        handleCountChange={handleCountChange}
+        onValueChange={handleCountChange}
       />
       <a onClick={() => handleRemoveClick(id)}   ><button>Remove</button></a>
       <hr />

@@ -6,6 +6,7 @@ export default class UpdateTasks extends Component {
     super(props);
     this.handleCountChange = this.handleCountChange.bind(this);
     this.handleRemoveClick = this.handleRemoveClick.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
   }
   handleCountChange(e, id) {
     const { onCountChange, date } = this.props;
@@ -14,6 +15,10 @@ export default class UpdateTasks extends Component {
   }
   handleRemoveClick(id) {
     this.props.onRemoveClick(id);
+  }
+  handleNameChange(e, id, name) {
+    console.log('name change', id, name);
+    this.props.onNameChange(id, name);
   }
   render() {
     const { tasks, date } = this.props;
@@ -28,6 +33,7 @@ export default class UpdateTasks extends Component {
                 <UpdateTask
                   handleCountChange={this.handleCountChange}
                   handleRemoveClick={this.handleRemoveClick}
+                  handleNameChange={this.handleNameChange}
                   id={id}
                   key={id}
                   name={name}
