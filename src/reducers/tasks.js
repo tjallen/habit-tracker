@@ -1,7 +1,8 @@
 import {
   ADD_TASK,
-  UPDATE_TASK_COUNT,
   REMOVE_TASK,
+  RENAME_TASK,
+  UPDATE_TASK_COUNT,
 } from './../constants';
 
 function tasksReducer(state = [], action) {
@@ -11,6 +12,18 @@ function tasksReducer(state = [], action) {
         id: action.id,
         name: action.name,
         data: action.data,
+      });
+    }
+    case REMOVE_TASK: {
+      return state.filter((item) => item.id !== action.id);
+    }
+    case RENAME_TASK: {
+      return state.map((task) => {
+        if (task.id !== action.id) return task;
+        return {
+          ...task,
+          name: action.name,
+        };
       });
     }
     case UPDATE_TASK_COUNT: {
@@ -26,9 +39,6 @@ function tasksReducer(state = [], action) {
           }
         }
       });
-    }
-    case REMOVE_TASK: {
-      return state.filter((item) => item.id !== action.id);
     }
     default:
       return state;

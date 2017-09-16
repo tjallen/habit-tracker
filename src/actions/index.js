@@ -2,8 +2,9 @@ import { v4 } from 'uuid';
 
 import {
   ADD_TASK,
-  UPDATE_TASK_COUNT,
   REMOVE_TASK,
+  RENAME_TASK,
+  UPDATE_TASK_COUNT,
   SET_DATE,
 } from './../constants';
 
@@ -13,6 +14,10 @@ export const setDate = (date) => ({
 
 export const addTask = (name) => ({
   type: ADD_TASK, name, id: v4(), data: {},
+});
+
+export const renameTask = (id, name) => ({
+  type: RENAME_TASK, id, name,
 });
 
 export const updateTaskCount = (id, date, count) => ({
