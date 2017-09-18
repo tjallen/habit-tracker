@@ -4,6 +4,7 @@ import {
   removeTask,
   renameTask,
   updateTaskCount,
+  setDate,
 } from './../actions';
 import App from './../components/App';
 
@@ -19,6 +20,7 @@ const AppContainer = connect(
     onRemoveClick: removeTask,
     onNameChange: renameTask,
     onCountChange: updateTaskCount,
+    onDatePickerChange: setDate,
   }
 )(App);
 export default AppContainer;
