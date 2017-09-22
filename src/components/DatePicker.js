@@ -5,7 +5,6 @@ const DatePicker = ({ onDatePickerChange }) => {
     <div>
       <span>current date:</span>&nbsp;
       <input
-        id="date"
         type="date"
         onChange={(e) => onDatePickerChange(e.target.value)} />
       <hr />

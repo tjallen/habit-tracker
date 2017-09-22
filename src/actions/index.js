@@ -13,7 +13,7 @@ export const setDate = (date) => ({
 });
 
 export const addTask = (name) => ({
-  type: ADD_TASK, name, id: v4(), data: {},
+  type: ADD_TASK, name, id: v4(), data: [],
 });
 
 export const renameTask = (id, name) => ({
