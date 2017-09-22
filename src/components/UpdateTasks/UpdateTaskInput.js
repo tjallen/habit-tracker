@@ -8,7 +8,7 @@ export default class UpdateTaskInput extends Component {
     }
   }
   handleChange(e, id) {
-    const value = e.target.value;
+    const value = parseInt(e.target.value, 10);
     this.setState({
       value,
     }, this.props.onValueChange(e, id, value));
