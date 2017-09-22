@@ -20,8 +20,8 @@ export const renameTask = (id, name) => ({
   type: RENAME_TASK, id, name,
 });
 
-export const updateTaskCount = (id, date, count) => ({
-  type: UPDATE_TASK_COUNT, id, date, count,
+export const updateTaskCount = (id, date, value) => ({
+  type: UPDATE_TASK_COUNT, id, date, value,
 });
 
 export const removeTask = (id) => ({

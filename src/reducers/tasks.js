@@ -25,15 +25,16 @@ function updateItemInArray(array, prop, val, callback) {
 function datesReducer(array, action) {
   switch(action.type) {
     case UPDATE_TASK_COUNT: {
-      const dateIsPresent = array.find(item => item.date === action.date);
+      const { date, value } = action;
+      const dateIsPresent = array.find(item => item.date === date);
       if (dateIsPresent) {
-        return updateItemInArray(array, 'date', action.date, (dataItem) => {
-          return updateObject(dataItem, { value: action.count });
+        return updateItemInArray(array, 'date', date, (dataItem) => {
+          return updateObject(dataItem, { value });
         });
       } else {
         return array.concat({
-          date: action.date,
-          value: action.count,
+          date,
+          value,
         });
       }
     }
