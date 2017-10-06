@@ -8,7 +8,14 @@ export default class UpdateTaskInput extends Component {
     }
   }
   handleChange(e, id) {
-    const value = parseInt(e.target.value, 10);
+    let value;
+    if (this.props.type === 'number') {
+      value = parseInt(e.target.value, 10);
+    } else if (this.props.type === 'text') {
+      value = e.target.value;
+    } else {
+      throw new Error('unknown UpdateTaskInput type');
+    }
     this.setState({
       value,
     }, this.props.onValueChange(e, id, value));
