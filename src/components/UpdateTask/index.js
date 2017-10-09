@@ -22,8 +22,12 @@ class UpdateTask extends Component {
     this.props.onNameChange(id, name);
   }
   render() {
-    const { id, name, count, date } = this.props;
+    const { id, name, date } = this.props;
     const txt = `count for ${date}`
+    const day = this.props.data.find((item) => {
+      return item.date === date
+    });
+    const dayValue = !day ? 0 : day.value;
     return (
       <div>
         <UpdateTaskLabel text='name' />
@@ -37,7 +41,7 @@ class UpdateTask extends Component {
         <UpdateTaskInput
           type='number'
           id={id}
-          value={count}
+          value={dayValue}
           onValueChange={this.handleCountChange}
         />
         <a onClick={() => this.handleRemoveClick(id)}   ><button>Remove</button></a>
