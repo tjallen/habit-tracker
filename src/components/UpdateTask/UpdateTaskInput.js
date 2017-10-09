@@ -7,6 +7,11 @@ export default class UpdateTaskInput extends Component {
       value: this.props.value
     }
   }
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      value: nextProps.value,
+    });
+  }
   handleChange(e, id) {
     let value;
     if (this.props.type === 'number') {
