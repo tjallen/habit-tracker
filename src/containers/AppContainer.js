@@ -21,6 +21,7 @@ const AppContainer = connect(
     onNameChange: renameTask,
     onCountChange: updateTaskCount,
     onDatePickerChange: setDate,
+    onDayClick: setDate,
   }
 )(App);
 export default AppContainer;
